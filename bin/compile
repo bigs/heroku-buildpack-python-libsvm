@@ -178,9 +178,9 @@ mkdir .libsvm &> /dev/null
 curl -L -o .libsvm/libsvm.tgz http://www.csie.ntu.edu.tw/~cjlin/cgi-bin/libsvm.cgi?+http://www.csie.ntu.edu.tw/~cjlin/libsvm+tar.gz
 cd .libsvm && tar zxf libsvm.tgz && rm .libsvm/libsvm.tgz
 
-for dir in $(ls .tmp); do
+for dir in $(ls .libsvm); do
   if [[ $dir =~ ^libsvm ]]; then
-    LIBSVM_DIR=".tmp/$dir"
+    LIBSVM_DIR=".libsvm/$dir"
     break
   fi
 done
