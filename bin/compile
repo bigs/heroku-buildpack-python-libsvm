@@ -175,7 +175,7 @@ puts-step "Installing python-libsvm"
 
 mkdir .libsvm &> /dev/null
 
-curl -L -o .libsvm/libsvm.tgz http://www.csie.ntu.edu.tw/~cjlin/cgi-bin/libsvm.cgi?+http://www.csie.ntu.edu.tw/~cjlin/libsvm+tar.gz > /dev/null 2>&1
+curl -L -o .libsvm/libsvm.tgz http://grouper-libraries.s3.amazonaws.com/libsvm-3.14.tar.gz > /dev/null 2>&1
 cd .libsvm
 LIBSVM_BASE="$(pwd)"
 tar zxf libsvm.tgz && rm libsvm.tgz && mkdir lib > /dev/null 2>&1
