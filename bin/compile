@@ -174,7 +174,7 @@ set +e
 puts-step "Installing python-libsvm"
 
 apt-get install python-libsvm
-if [ $? -ne 0 ] then
+if [ $? -ne 0 ]; then
   puts-warn "Error installing libsvm"
   exit 1
 fi
