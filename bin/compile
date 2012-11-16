@@ -173,11 +173,27 @@ mkdir -p $(dirname $PROFILE_PATH)
 set +e
 puts-step "Installing python-libsvm"
 
-apt-get install python-libsvm
-if [ $? -ne 0 ]; then
-  puts-warn "Error installing libsvm"
+mkdir .libsvm &> /dev/null
+
+curl -L -o .libsvm/libsvm.tgz http://www.csie.ntu.edu.tw/~cjlin/cgi-bin/libsvm.cgi?+http://www.csie.ntu.edu.tw/~cjlin/libsvm+tar.gz
+cd .libsvm && tar zxf libsvm.tgz && rm .libsvm/libsvm.tgz
+
+for dir in $(ls .tmp); do
+  if [[ $dir =~ ^libsvm ]]; then
+    LIBSVM_DIR=".tmp/$dir"
+    break
+  fi
+done
+
+cd $LIBSVM_DIR
+make lib > /dev/null 2>&1
+
+if [ $? != 0 ]; then
+  puts-warn "Failed to build libsvm"
   exit 1
 fi
+
+cd $BUILD_DIR
 
 puts-step "Preparing Python interpreter ($PYTHON_VERSION)"
 puts-step "Creating Virtualenv version $(virtualenv --version)"
