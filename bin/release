@@ -10,9 +10,8 @@ cat <<EOF
 config_vars:
   PATH: /app/.heroku/venv/bin:/bin:/usr/local/bin:/usr/bin
   PYTHONUNBUFFERED: true
-  LIBRARY_PATH: /app/.heroku/vendor/lib:/app/.libsvm/lib
-  LD_LIBRARY_PATH: /app/.heroku/vendor/lib:/app/.libsvm/lib
-  LIBSVM_PATH: /app/.libsvm/lib
+  LIBRARY_PATH: /app/.heroku/vendor/lib
+  LD_LIBRARY_PATH: /app/.heroku/vendor/lib
   LANG: en_US.UTF-8
   PYTHONHASHSEED: random
   PYTHONHOME: /app/.heroku/venv/
