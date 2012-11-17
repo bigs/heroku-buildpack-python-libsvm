@@ -195,6 +195,7 @@ if [ $? != 0 ]; then
 fi
 cp libsvm.so.2 $LIBSVM_BASE/lib
 LIBSVM_LIB_PATH="$LIBSVM_BASE/lib/libsvm.so.2"
+puts-step "Successfully installed libsvm to $LIBSVM_LIB_PATH"
 cd $LIBSVM_BASE && rm -rf $LIBSVM_DIR
 
 cd $BUILD_DIR
@@ -274,7 +275,7 @@ set-default-env LANG en_US.UTF-8
 set-default-env PYTHONHASHSEED random
 set-default-env PYTHONHOME /app/.heroku/venv/
 set-default-env PYTHONPATH /app/
-set-default-env LIBSVM_PATH '$LIBSVM_LIB_PATH'
+set-env LIBSVM_PATH $LIBSVM_LIB_PATH
 
 # ### Fin.
 
