@@ -178,7 +178,7 @@ mkdir .libsvm &> /dev/null
 curl -L -o .libsvm/libsvm.tgz http://grouper-libraries.s3.amazonaws.com/libsvm-3.14.tar.gz > /dev/null 2>&1
 cd .libsvm
 LIBSVM_BASE="$(pwd)"
-tar zxf libsvm.tgz && rm libsvm.tgz && mkdir lib > /dev/null 2>&1
+tar zxf libsvm.tgz && rm libsvm.tgz && mkdir lib && mkdir python > /dev/null 2>&1
 
 for dir in $(ls); do
   if [[ $dir =~ ^libsvm ]]; then
@@ -194,7 +194,9 @@ if [ $? != 0 ]; then
   exit 1
 fi
 cp libsvm.so.2 $LIBSVM_BASE/lib
-LIBSVM_LIB_PATH="/app/.libsvm/lib/libsvm.so.2"
+cp python/svm.py $LIBSVM_BASE/python
+cp python/svmutil.py $LIBSVM_BASE/python
+LIBSVM_LIB_PATH="/app/.libsvm/lib"
 puts-step "Successfully installed libsvm to $LIBSVM_LIB_PATH"
 cd $LIBSVM_BASE && rm -rf $LIBSVM_DIR
 
@@ -270,8 +272,8 @@ done
 set-env PATH '$HOME/.heroku/venv/bin:$PATH'
 set-env LIBSVM_PATH '$LIBSVM_LIB_PATH'
 set-default-env PYTHONUNBUFFERED true
-set-default-env LIBRARY_PATH /app/.heroku/vendor/lib
-set-default-env LD_LIBRARY_PATH /app/.heroku/vendor/lib
+set-default-env LIBRARY_PATH /app/.heroku/vendor/lib:/app/.libsvm/lib
+set-default-env LD_LIBRARY_PATH /app/.heroku/vendor/lib:/app/.libsvm/lib
 set-default-env LANG en_US.UTF-8
 set-default-env PYTHONHASHSEED random
 set-default-env PYTHONHOME /app/.heroku/venv/
