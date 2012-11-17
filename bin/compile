@@ -268,7 +268,7 @@ done
 # Set context environment variables.
 
 set-env PATH '$HOME/.heroku/venv/bin:$PATH'
-set-env LIBSVM_PATH '$LIBSVM_LIB_PATH'
+echo "export LIBSVM_PATH=$LIBSVM_LIB_PATH" >> $PROFILE_PATH
 set-default-env PYTHONUNBUFFERED true
 set-default-env LIBRARY_PATH /app/.heroku/vendor/lib
 set-default-env LD_LIBRARY_PATH /app/.heroku/vendor/lib
